@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+
+</head>
+<body>
+<div id="example"></div>
+<% for (var chunk in htmlWebpackPlugin.files.chunks) {
+    var reg = /server-.*.js$/;
+    var regCom = /common-.*.js$/
+    if (!htmlWebpackPlugin.files.chunks[chunk].entry.match(reg) && !htmlWebpackPlugin.files.chunks[chunk].entry.match(regCom)) {
+%>
+<script src="<%= htmlWebpackPlugin.options.staticUrl + htmlWebpackPlugin.files
+        .chunks[chunk].entry %>"></script>
+<% } } %>
+
+</body>
+</html>

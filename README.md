@@ -1,2 +1,1 @@
-# think-react-blog
-Blog搭建
+自己搭建的blog
