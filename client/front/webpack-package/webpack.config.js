@@ -25,7 +25,7 @@ if(process.env.NODE_ENV === 'development') {//开发环境
 conf.externals = {//公共模块处理
 	jquery: 'jQuery',
 	redux: 'redux',
-	'react-router': 'reactRouter',
+	// 'react-router': 'reactRouter',
 	moment: 'moment',
 	lodash: 'lodash',
 };
