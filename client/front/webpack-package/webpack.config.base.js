@@ -69,6 +69,18 @@ function getBaseConf(param) {
 		filename: conf.bundle.jsName,
 		publicPath: conf.publicPath || '/static/'
 	};
+	if (conf.server_render !== true) {
+		if (env !== 'local' && env !== 'development' && process.env.SERVER_RENDER !== 'true') {
+			config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+				compress: {
+					drop_console: true,
+					warnings: false
+				}
+			}));
+		} else {
+			config.devtool = 'inline-source-map';
+		}
+	}
 	return config;
 }
 
