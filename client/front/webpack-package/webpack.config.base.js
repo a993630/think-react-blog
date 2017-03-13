@@ -10,7 +10,7 @@ function getBaseConf(param) {
 	const env = process.env.NODE_ENV || 'local';
 	let params = param || {};
 	const conf = confweb;
-	
+	let isDev = process.env.NODE_ENV === 'development';
 	let config = {
 		context: __dirname,//绝对路径
 		resolve: {
@@ -44,6 +44,14 @@ function getBaseConf(param) {
 					query: {
 						presets: ['react', 'es2015']
 					}
+				},
+				{
+					test: /\.css$/,
+					loader: isDev ? 'style!css-loader?sourceMap' : ExtractTextPlugin.extract('style', 'css-loader?sourceMap'),
+				},
+				{
+					test: /\.less$/,
+					loader: isDev ? 'style!css-loader?sourceMap!postcss-loader!less-loader?sourceMap' : ExtractTextPlugin.extract('css-loader?sourceMap!postcss-loader!less-loader?sourceMap'),
 				},
 				{
 					test: /\.(woff|svg)([\?]?.*)$/,
