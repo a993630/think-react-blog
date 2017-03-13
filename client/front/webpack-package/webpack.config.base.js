@@ -51,7 +51,7 @@ function getBaseConf(param) {
 				},
 				{
 					test: /\.less$/,
-					loader: isDev ? 'style!css-loader?sourceMap!postcss-loader!less-loader?sourceMap' : ExtractTextPlugin.extract('css-loader?sourceMap!postcss-loader!less-loader?sourceMap'),
+					loader: isDev ? 'style!css-loader?sourceMap!less-loader?sourceMap' : ExtractTextPlugin.extract('css-loader?sourceMap!less-loader?sourceMap'),
 				},
 				{
 					test: /\.(woff|svg)([\?]?.*)$/,
