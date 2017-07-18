@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Simditor from 'simditor'
 import $ from 'jquery';
+import { Button } from 'antd';
 import Editor from '../common/Simditor/Simditor'
 
 export default class App extends Component {
@@ -14,7 +14,10 @@ export default class App extends Component {
 	
 	render() {
 		return(
-			<Editor />
+			<div>
+				<Button/>
+				<Editor />
+			</div>
 		)
 	}
 }

@@ -26,7 +26,7 @@ conf.externals = {//公共模块处理
 	// jquery: 'jQuery',
 	redux: 'redux',
 	// 'react-router': 'reactRouter',
-	moment: 'moment',
+	// moment: 'moment',
 	lodash: 'lodash',
 };
 

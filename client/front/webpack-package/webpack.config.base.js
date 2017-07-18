@@ -14,7 +14,7 @@ function getBaseConf(param) {
 	let config = {
 		context: __dirname,//绝对路径
 		resolve: {
-			extensions: ['', '.js', '.jsx'],
+			extensions: ['.js', '.jsx'],
 		},
 		plugins: [
 			new ForceCaseSensitivityPlugin(),
@@ -24,52 +24,58 @@ function getBaseConf(param) {
 				'process.env.COMPILE_M': JSON.stringify(process.env.COMPILE_M)
 			}),
 			new webpack.HotModuleReplacementPlugin(),
-			new webpack.NoErrorsPlugin(),
+			new webpack.NoEmitOnErrorsPlugin(),
 		],
 		module: {
-			loaders: [
-				{ test: /\.html/, loader: 'html?removeAttributeQuotes=false' },
-				{
-					test: /\.jsx?$/,
-					loader: 'babel',
-					exclude: /(node_modules)/,
-					query: {
-						presets: ['react', 'es2015']
-					}
-				},
-				{
-					test: /\.js?$/,
-					loader: 'babel',
-					exclude: /(node_modules)/,
-					query: {
-						presets: ['react', 'es2015']
-					}
-				},
-				{
-					test: /\.css$/,
-					loader: isDev ? 'style!css-loader?sourceMap' : ExtractTextPlugin.extract('style', 'css-loader?sourceMap'),
-				},
-				{
-					test: /\.less$/,
-					loader: isDev ? 'style!css-loader?sourceMap!less-loader?sourceMap' : ExtractTextPlugin.extract('css-loader?sourceMap!less-loader?sourceMap'),
-				},
-				{
-					test: /\.(woff|svg)([\?]?.*)$/,
-					loader: 'file?name=[name].[hash].[ext]',
-				},
-				{
-					test: /\.(ttf|eot)([\?]?.*)$/,
-					loader: 'file?name=[name].[hash].[ext]',
-				},
-				{
-					test: /\.(jpe?g|png|gif|svg|ico)$/,
-					loader: 'url?name=[name].[hash].[ext]&limit=10000',
-				},
-				{
-					test: /\.json$/,
-					loader: 'json',
-				},
-			],
+            rules: [
+                {
+                    test: /\.html/,
+                    use: [
+                        {
+                            loader: 'html',
+                            options: {
+                                'removeAttributeQuotes': false
+                            }
+                        },
+                    ]
+                },
+                {
+                    test: /\.(js|jsx)$/,
+                    loader: 'babel-loader',
+                    options: {
+                        "plugins": [["import", {
+                            "libraryName": "antd",
+                            "style": true,   // or 'css'
+                        }]],
+                        "presets": ["react"]
+                    },
+                    exclude: /(node_modules)/,
+                },
+                {
+                    test: /\.css$/,
+                    loader: isDev ? 'style-loader!css-loader?sourceMap' : ExtractTextPlugin.extract('style', 'css-loader?sourceMap'),
+                },
+                {
+                    test: /\.less$/,
+                    loader: isDev ? 'style-loader!css-loader?sourceMap!less-loader?sourceMap' : ExtractTextPlugin.extract('css-loader?sourceMap!less-loader?sourceMap'),
+                },
+                {
+                    test: /\.(woff|svg)([\?]?.*)$/,
+                    loader: 'file?name=[name].[hash].[ext]',
+                },
+                {
+                    test: /\.(ttf|eot)([\?]?.*)$/,
+                    loader: 'file?name=[name].[hash].[ext]',
+                },
+                {
+                    test: /\.(jpe?g|png|gif|svg|ico)$/,
+                    loader: 'url?name=[name].[hash].[ext]&limit=10000',
+                },
+                {
+                    test: /\.json$/,
+                    loader: 'json',
+                },
+            ]
 		},
 	};
 	config.output = {
