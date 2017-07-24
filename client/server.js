@@ -13,6 +13,7 @@ var compiler = webpack(config);
 app.use(require('webpack-dev-middleware')(compiler, {
 	noInfo: true,
 	publicPath: config.output.publicPath,
+	headers: {'Access-Control-Allow-Origin': '*'},
 	stats: {
 		colors: true,
 		hash: false,
@@ -24,7 +25,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.use('/static', express.static('./dist/static'));//托管静态资源文件
+app.use('/static', express.static('./dist/static/'));//托管静态资源文件
 
 app.listen(5800, function(err) {
 	if (err) {

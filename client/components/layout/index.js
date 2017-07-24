@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './style.less'
 import {Layout, Menu, Breadcrumb, Icon} from 'antd';
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
@@ -7,12 +8,11 @@ export default class Layouts extends Component {
     render() {
         const {children} = this.props;
         return (
-            <div>
+            <div className="wrapper">
                 <Layout>
                     <Header className="header">
                         <div className="logo"/>
                         <Menu
-                            theme="dark"
                             mode="horizontal"
                             defaultSelectedKeys={['2']}
                             style={{lineHeight: '64px'}}
